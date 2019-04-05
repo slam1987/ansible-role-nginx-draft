@@ -1,5 +1,5 @@
 # ansible-role-nginx-draft
-Ansible role to install nginx web server.
+Simple Ansible role to install nginx web server with configurable home page.
 
 This role could use some serious improvements.
 
