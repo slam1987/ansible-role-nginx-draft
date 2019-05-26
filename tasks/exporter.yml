@@ -35,14 +35,14 @@
   systemd:
     state: started
     name: nginx_exporter
-    enabled: yes
+    enabled: true 
 
 - name: TEST port 9113 for nginx_up 1
   become: true
   uri:
     url: http://localhost:9113/metrics
     method: GET
-    return_content: yes
+    return_content: true
   failed_when: "'nginx_up 1' not in this.content"
 
 - name: TEST port 80 for status code 200
