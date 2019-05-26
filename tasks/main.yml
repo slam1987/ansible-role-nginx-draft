@@ -1,4 +1,6 @@
 ---
+- include: exporter.yml
+
 - name: rpm key
   become: true
   rpm_key:
