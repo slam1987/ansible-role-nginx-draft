@@ -16,13 +16,14 @@
   become: true
   get_url:
     url: https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v0.3.0/nginx-prometheus-exporter-0.3.0-linux-amd64.tar.gz
-    dest: /nginx-exporter.tar.gz
+    dest: /etc/nginx-exporter.tar.gz
 
 - name: unpackage nginx exporter
   become: true
   unarchive:
-    src: /nginx-exporter.tar.gz
-    dest: /nginx-exporter/
+    remote_src: true
+    src: /etc/nginx-exporter.tar.gz
+    dest: /usr/local/bin/
 
 - name: creating /etc/systemd/system/nginx_exporter.service file
   become: true
@@ -41,12 +42,10 @@
   become: true
   uri:
     url: http://localhost:9113/metrics
-    method: GET
-    return_content: true
-  failed_when: "'nginx_up 1' not in this.content"
+    status_code: 200
 
 - name: TEST port 80 for status code 200
   become: true
   uri:
     url: http://localhost:80
-  failed_when: uri_resp.status != 200
+    status_code: 200

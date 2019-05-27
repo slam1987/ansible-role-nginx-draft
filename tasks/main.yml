@@ -1,5 +1,4 @@
 ---
-- include: exporter.yml
 
 - name: rpm key
   become: true
@@ -15,7 +14,7 @@
     enabled: true
     gpgcheck: true
 
-- name: start nginx
+- name: install nginx
   become: true
   package:
     name: nginx
@@ -54,3 +53,12 @@
           allow 127.0.0.1;
           deny all;
       }
+
+- name: start nginx service
+  become: true
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- include: exporter.yml
