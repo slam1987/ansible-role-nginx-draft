@@ -59,6 +59,6 @@
   service:
     name: nginx
     state: started
-    enabled: yes
+    enabled: true
 
 - include: exporter.yml
